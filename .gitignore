@@ -1,1 +1,10 @@
 config.h
+
+# Firmware-specific
+config.h
+*.bin
+*.hex
+build/
+dependencies/
+*.o
+*.d
