@@ -1,1 +1,13 @@
 config.h
+
+firmware/openScale/lib/HX711/HX711.h
+
+firmware/openScale/lib/HX711/HX711.cpp
+
+firmware/openScale/lib/HX711/library.properties
+
+firmware/openScale/lib/HX711/OneWire/library.properties
+
+firmware/openScale/lib/HX711/OneWire/OneWire.cpp
+
+firmware/openScale/lib/HX711/OneWire/OneWire.h
