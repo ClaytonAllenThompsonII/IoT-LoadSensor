@@ -1,4 +1,5 @@
 #include "application.h"
+#include "config.h" // Include the configuration header
 
 // Include the WebSocket library header.
 // Make sure you have the correct library for WebSocket communication.
