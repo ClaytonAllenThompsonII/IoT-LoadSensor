@@ -1,4 +1,5 @@
 #include "application.h"
+#include "config.h" // Include the configuration header
 
 // Include the WebSocket library header.
 // Make sure you have the correct library for WebSocket communication.
@@ -51,8 +52,8 @@ void loop() {
 }
 
 float readLoadSensorData() {
-    // This function should contain the logic to read your load sensor data.
-    // The implementation will depend on your sensor setup and the library you're using.
+    // This function should contain the logic to read load sensor data.
+    
     // Placeholder return value.
     return 123.45; // Replace this with actual sensor reading logic.
 }
