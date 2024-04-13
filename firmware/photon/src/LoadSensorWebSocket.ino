@@ -11,17 +11,22 @@ TCPClient tcpClient;
 
 // Server details
 char serverAddress[] = "your.django.server.com"; // The Django server's address
-int port = 80; // The port, use 443 for WSS/HTTPS connections.
+int port = 443; // The port, use 443 for WSS/HTTPS connections; still considering SSH
 String path = "/ws/loaddata/"; // The WebSocket path on your server.
 
 void setup() {
     // Initialize serial communication at a baud rate of 9600.
-    Serial.begin(9600);
+    Serial.begin(9600); // Debug Terminal
+
+    Serial1.begin(9600); // For TX/RX communication with OpenScale
 
     // Connect to the Wi-Fi network (adjust with your credentials).
     WiFi.connect("yourSSID", "yourPassword");
-    Wait for a connection.
-    while (WiFi.ready() == false) {}
+    //Wait for a connection.
+    while (WiFi.ready() == false) {
+        delay(100);  // Wait for Wi-Fi connection
+    }
+    Serial.println("Connected to WiFi.");
 
     // Attempt to connect to the WebSocket server.
     webSocketClient.connect(tcpClient, serverAddress, port, path);
@@ -51,9 +56,16 @@ void loop() {
     delay(1000);
 }
 
-float readLoadSensorData() {
-    // This function should contain the logic to read load sensor data.
-    
-    // Placeholder return value.
-    return 123.45; // Replace this with actual sensor reading logic.
+float readAndSendWeightData() {
+    if (Serial1.available() > 0) {
+        String weightData = Serial1.readStringUntil('\n');
+        if (!weightData.isEmpty()) {
+            float weight = weightData.toFloat();
+            if (weight > 0) {
+                String dataToSend = "{\"weight\": \"" + String(weight, 2) + "\"}";
+                webSocketClient.send(dataToSend);
+                Serial.println("Sent weight data: " + dataToSend);
+            }
+        }
+    }
 }

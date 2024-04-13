@@ -4,8 +4,13 @@
 
 WebSocketClient webSocketClient;
 
-void WebSocketTransmitter::initialize() {
+void WebSocketTransmitter::initialize(const char* serverAddress, int port, const char* path) {
     // Setup WebSocket connection
+    if (webSocketClient.connect(serverAddress, port, path)) {
+        Serial.println("WebSocket connected successfully.");
+    } else {
+        Serial.println("WebSocket connection failed.");
+    }
 }
 
 void WebSocketTransmitter::update() {
